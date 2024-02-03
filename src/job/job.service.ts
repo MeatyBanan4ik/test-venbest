@@ -44,7 +44,7 @@ export class JobService {
     const estimateCost = await this.taskService.getEstimateCost(task.id);
 
     if (estimateCost < thisJobCost) {
-      return new BadRequestException('exceeding the limit of funds for a task');
+      throw new BadRequestException('exceeding the limit of funds for a task');
     }
 
     return this.save(dto);
