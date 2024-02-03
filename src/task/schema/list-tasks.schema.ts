@@ -19,6 +19,6 @@ export class ListTasksSchema {
   })
   readonly end_time: Date;
 
-  @ApiProperty({ example: 1, description: 'task estimate cost' })
-  readonly estimate_cost: number;
+  @ApiProperty({ example: '59.00%', description: 'task spent cost in percent' })
+  readonly spent_cost: string;
 }

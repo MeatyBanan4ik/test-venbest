@@ -1,6 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
-export class EstimateCostFilterDto {
+export class SpentCostFilterDto {
   @ApiPropertyOptional({
     name: 'filters[min]',
     example: 1,

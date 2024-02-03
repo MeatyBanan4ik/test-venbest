@@ -2,7 +2,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { TaskService } from './task.service';
-import { EstimateCostFilterDto } from './dto/list-tasks.dto';
+import { SpentCostFilterDto } from './dto/list-tasks.dto';
 import { ListTasksSchema } from './schema/list-tasks.schema';
 
 @ApiTags('tasks')
@@ -13,7 +13,7 @@ export class TaskController {
   @ApiOperation({ summary: 'get tasks list' })
   @ApiOkResponse({ type: ListTasksSchema })
   @Get()
-  list(@Query('filters') dto: EstimateCostFilterDto) {
+  list(@Query('filters') dto: SpentCostFilterDto) {
     return this.service.list(dto);
   }
 }

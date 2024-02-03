@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { TaskModel } from './task.model';
-import { EstimateCostFilterDto } from './dto/list-tasks.dto';
+import { SpentCostFilterDto } from './dto/list-tasks.dto';
 
 @Injectable()
 export class TaskService {
@@ -11,7 +11,7 @@ export class TaskService {
     private repository: Repository<TaskModel>,
   ) {}
 
-  async list(filtersDto: EstimateCostFilterDto) {
+  async list(filtersDto: SpentCostFilterDto) {
     const query = this.repository
       .createQueryBuilder('t')
       .leftJoinAndSelect(
@@ -28,7 +28,7 @@ export class TaskService {
       )
       .select([
         't.*',
-        'Round(((sj.sum_costs / t.cost) * 100), 2) AS "estimateCost"',
+        'Round(((sj.sum_costs / t.cost) * 100), 2) AS "spentCost"',
       ]);
 
     await this.filters(query, filtersDto);
@@ -40,7 +40,7 @@ export class TaskService {
       cost: Number(task.cost),
       start_time: task.startTime,
       end_time: task.endTime,
-      estimate_cost: Number(task.estimateCost),
+      spent_cost: `${task.spentCost}%`,
     }));
   }
 
